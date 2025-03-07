@@ -1,0 +1,83 @@
+@if (isLoading) {
+  <p>Por favor espere....</p>
+} @else {
+
+
+
+
+<h1>Inscripciones Estudiantes</h1>
+
+<!--declaramos en el form el constructor-->
+<form (ngSubmit)="onSubmit()" [formGroup]="studentForm" class="w-6">
+
+    <div class="grid">
+        <div class="col-6">
+         <mat-form-field class="w-full">
+        <mat-label>Nombre</mat-label>
+        <!--form control name para que maneje el input nuestro constructor-->
+        <input formControlName="name" matInput/>
+    </mat-form-field>   
+        </div>
+        <div class="col-6">
+            <mat-form-field class="w-full">
+        <mat-label>Apellido</mat-label>
+        <input formControlName="lastName" matInput/>
+    </mat-form-field>
+        </div>
+    </div>
+
+   <button type="submit" mat-button>Inscribir Estudiante</button>  
+</form>
+  
+<hr>
+
+  
+<table mat-table [dataSource]="students" class="mat-elevation-z8">
+  
+    <!-- id students -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> Id </th>
+      <td mat-cell *matCellDef="let element"> {{element.id  }} </td>
+    </ng-container>
+  
+    <!-- Name  -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Nombre </th>
+      <td mat-cell *matCellDef="let element"> {{element.name  }} </td>
+    </ng-container>
+  
+    <!-- Lastname -->
+    <ng-container matColumnDef="lastName">
+      <th mat-header-cell *matHeaderCellDef> Apellido </th>
+      <td mat-cell *matCellDef="let element"> {{element.lastName  }} </td>
+    </ng-container>
+  
+    <!-- acciones -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Acciones </th>
+      <td mat-cell *matCellDef="let element">
+        <!--capturamos el ondelte para filtrar y borrar el estudiante requerido-->
+        <button (click)="onDelete(element.id)" mat-icon-button>
+            <mat-icon>delete</mat-icon>
+        </button>
+        <button [routerLink]="element.id" 
+        [queryParams]= " {name: element.name,
+           lastName: element.lastName}"
+        mat-icon-button>
+          <mat-icon>visibility</mat-icon>
+      </button>
+        
+        
+    </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  
+  
+  
+ }
+
+
+

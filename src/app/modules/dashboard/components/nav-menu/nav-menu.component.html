@@ -1,0 +1,16 @@
+<mat-nav-list>
+    <!-- router link es un metodo de navegacion de angular -->
+     <!-- si el router link el valor que pasamos no comienza con un / es una navegacion relativa y se rompe todo -->
+      @for (item of linkItems; track $index) {
+      <a [routerLink]="item.routerLink"
+      routerLinkActive
+      #linkItem="routerLinkActive"
+      [activated]="linkItem.isActive"
+      mat-list-item>
+        {{item.label}}
+      </a>
+  }
+      <!-- para cerrar sesion -->
+      <a (click)="logout()" mat-list-item>Cerrar Sesión</a>
+  </mat-nav-list>
+  

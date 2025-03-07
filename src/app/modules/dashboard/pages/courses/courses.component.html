@@ -1,0 +1,16 @@
+<h1>Cursos</h1>
+@if (isLoadig) {
+  <mat-spinner/>  
+} @else {
+  
+  <button *ngIf="isAdmin$ |async" (click)="openFormDialog()" mat-flat-button>
+    Crear Curso
+  </button>
+
+
+    <app-courses-table [dataSource]="dataSource"
+     (delete)="onDelete($event)"
+     (edit)="openFormDialog($event)">
+    </app-courses-table>
+}
+
